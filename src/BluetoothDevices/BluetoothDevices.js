@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Section from '../../components/section'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import Fade from '../../components/Fade'
+import { requestLocationPermission } from '../util/permissions'
+import { BleManager } from 'react-native-ble-plx'
 
 // function DevicesTitle() {
 //   const bluetoothArray = [1, 2, 3, 4]
@@ -15,11 +16,16 @@ import Fade from '../../components/Fade'
 //   )
 // }
 
+const windowHeight = Dimensions.get("window").height
+const windowWidth = Dimensions.get("window").width
+
 class BluetoothDevices extends Component {
 
   state = {
     // randomNumber: Math.floor(Math.random() * 4)
-    randomNumber: 3
+    randomNumber: 3,
+    device: "",
+    viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape",
   }
 
   DevicesTitle() {
@@ -44,7 +50,41 @@ class BluetoothDevices extends Component {
           backgroundColor: "#FF7400"
         },
         headerTintColor: '#fff'
+      }),
+      Dimensions.addEventListener("change", this._updateStyles);
+    }
+
+    _updateStyles = dims => {
+      this.setState({
+        viewMode: dims.window.height > dims.window.width ? "portrait" : "landscape"
       })
+    }
+
+    componentWillUnmount() {
+      Dimensions.removeEventListener("change", this._updateStyles);
+    }
+
+    _scanForDevices = () => {
+      // const permission = requestLocationPermission()
+      // if (permission) {
+        console.log("went in")
+        this.manager = new BleManager
+        this.manager.startDeviceScan(["25810001-722E-7FB7-EA11-3749442F5886"], null, (e, d) => {
+          console.log(e, d)
+          if (d) {
+            console.log("went in 2")
+            this.manager.stopDeviceScan()
+            this.manager.connectToDevice(d.id).then(() => {
+              console.log("WTF?", d)
+            }).catch((e) => console.log("error", e))
+          }
+        })
+        // this.setState({ device: "ok" })
+      // }
+    }
+
+    _connectToDevice = () => {
+      this.manager.connectToDevice(`${this.state.device}`)
     }
 
     render() {
@@ -57,6 +97,7 @@ class BluetoothDevices extends Component {
             //     <Text style={{ fontSize: 20 }}>Test</Text>
             //   </View>
             // </Fade>
+            // <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
             <View>
             {this.state.randomNumber <= 2 && (
               <TouchableOpacity onPress={() => this.props.navigation.navigate('Timer', { number: 2 })}>
@@ -85,10 +126,12 @@ class BluetoothDevices extends Component {
             </TouchableOpacity>
             )}
             {this.state.randomNumber === 3 && (
-              <View>
+              <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
               <TouchableOpacity 
-              style={{ height: "50%", borderColor: "#FF7400", borderWidth: 3, alignItems: "center", justifyContent: "center" }}
-              onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}>
+              style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
+              onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
+              //onPress={() => this._scanForDevices()}
+              >
                 {/* <Section style={styles.sectionSizeTwo}> */}
                 <FontAwesome
                     name="dot-circle-o"
@@ -128,8 +171,9 @@ class BluetoothDevices extends Component {
                 {/* </Section> */}
             </TouchableOpacity>
             <TouchableOpacity 
-            style={{ height: "50%", borderColor: "#FF7400", borderWidth: 3, alignItems: "center", justifyContent: "center" }}
+              style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 32 })}
+              //onPress={() => this._connectToDevice()}
             >
                 {/* <Section style={styles.sectionSizeTwo}> */}
                 <View style={{ flexDirection: "row"}}>
@@ -220,6 +264,27 @@ const styles = StyleSheet.create({
   sectionSizeThree: {
     height: "33%",
     width: "100%"
+  },
+  portraitWrapper: {
+    flexDirection: "column"
+  },
+  horizontalWrapper: {
+    flexDirection: "row"
+  },
+  threeDevicesPortWrapper: {
+    height: "50%", 
+    borderColor: "#FF7400", 
+    borderWidth: 3, 
+    alignItems: "center", 
+    justifyContent: "center"
+  },
+  threeDevicesHorWrapper: {
+    width: windowWidth / 2,
+    height: windowHeight * 0.81,
+    borderColor: "#FF7400", 
+    borderWidth: 3, 
+    alignItems: "center", 
+    justifyContent: "center"
   }
 
 })

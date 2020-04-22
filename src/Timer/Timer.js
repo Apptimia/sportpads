@@ -20,11 +20,22 @@ class TimerScreen extends Component {
 
     componentDidMount() {
         console.log(this.props.route.params.number)
-        Dimensions.addEventListener('change', () => {
-            this.setState({
-              orientation: isPortrait() ? 'portrait' : 'landscape'
-            });
-          });
+        // Dimensions.addEventListener('change', () => {
+        //     this.setState({
+        //       orientation: isPortrait() ? 'portrait' : 'landscape'
+        //     });
+        //   });
+        Dimensions.addEventListener("change", this._updateStyles);
+    }
+
+    _updateStyles = dims => {
+      this.setState({
+        viewMode: dims.window.height > dims.window.width ? "portrait" : "landscape"
+      })
+    }
+
+    componentWillUnmount() {
+      Dimensions.removeEventListener("change", this._updateStyles);
     }
 
     isPortrait = () => {
@@ -72,7 +83,7 @@ class TimerScreen extends Component {
             <View style={{ flex: 1 }}>
             {this.props.route.params.number === 2 && (
             <Section>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => console.log("test")}>
                 <FontAwesome
                   name="dot-circle-o"
                   size={this.state.randomNumber <= 2 ? 100 : 35}
@@ -100,7 +111,7 @@ class TimerScreen extends Component {
             )}
 
             {this.props.route.params.number === 31 && (
-            <Section>
+            <Section style={{height: "50%"}}>
             <FontAwesome
                     name="dot-circle-o"
                     size={30}
@@ -224,6 +235,14 @@ class TimerScreen extends Component {
           </View>
         )
     }
+}
+
+const horizontalView = () => {
+  return (
+    <View>
+      <Text>TEST</Text>
+    </View>
+  )
 }
 
 const options = {
