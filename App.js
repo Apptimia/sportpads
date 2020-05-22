@@ -32,33 +32,34 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Stopwatch } from 'react-native-stopwatch-timer'
 import BluetoothDevices from './src/BluetoothDevices/BluetoothDevices'
 import TimerScreen from './src/Timer/Timer'
+import WelcomeScreen from './src/WelcomeScreen/WelcomeScreen'
 
 const Stack = createStackNavigator()
 
 const SportPadsStack = () => {
   return (
     <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={BluetoothDevices}
-          options={{
-            title: 'Devices',
-            headerStyle: {
-              backgroundColor: '#FF7400'
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Timer"
-          component={Timer}
-        />
-      </Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={BluetoothDevices}
+        options={{
+          title: 'Devices',
+          headerStyle: {
+            backgroundColor: '#FF7400'
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Timer"
+        component={Timer}
+      />
+    </Stack.Navigator>
   )
 }
 
 function DevicesTitle() {
   const bluetoothArray = [1, 2, 3, 4]
-  const randomNumber = Math.floor(Math.random() * (bluetoothArray.length+1))
+  const randomNumber = Math.floor(Math.random() * (bluetoothArray.length + 1))
   return (
     <View style={{ justifyContent: "center", alignContent: "center" }}>
       <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>Devices: {randomNumber}</Text>
@@ -71,26 +72,37 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{
+            headerTitle: "SportPads",
+            headerStyle: {
+              backgroundColor: "#FF7400"
+            },
+            headerTintColor: '#fff'
+          }}
+        />
+        <Stack.Screen
           name="Devices"
           component={BluetoothDevices}
-          // options={({ route }) => ({ title: route.name })}
-          //   title: 'Devices',
-          //   headerStyle: {
-          //     backgroundColor: '#FF7400'
-          //   },
-          //   headerTintColor: '#fff'
-          // }}
+        // options={({ route }) => ({ title: route.name })}
+        //   title: 'Devices',
+        //   headerStyle: {
+        //     backgroundColor: '#FF7400'
+        //   },
+        //   headerTintColor: '#fff'
+        // }}
         />
         <Stack.Screen
           name="Timer"
           component={TimerScreen}
-          options={{ 
+          options={{
             headerTitle: "Trening",
             headerStyle: {
               backgroundColor: "#FF7400"
             },
             headerTintColor: '#fff'
-            }}
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -112,7 +124,7 @@ export default function App() {
 
 //     const getRandomNumber = () => {
 //       const bluetoothArray = [1, 2, 3, 4]
-  
+
 //       const randomNumber = Math.floor(Math.random() * (bluetoothArray.length+1))
 //       this.setState({ blueToothDevices: randomNumber })
 //     }
@@ -124,15 +136,15 @@ export default function App() {
 //     const resetTimer = () => {
 //       this.setState({timerStart: false, timerReset: true});
 //     }
-  
+
 //     const toggleStopwatch = () => {
 //       this.setState({stopwatchStart: !this.state.stopwatchStart, stopwatchReset: false});
 //     }
-  
+
 //     const resetStopwatch = () => {
 //       this.setState({stopwatchStart: false, stopwatchReset: true});
 //     }
-    
+
 //     const getFormattedTime = (time) => {
 //         this.currentTime = time;
 //     };
