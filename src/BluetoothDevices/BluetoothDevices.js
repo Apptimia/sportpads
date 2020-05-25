@@ -59,26 +59,19 @@ class BluetoothDevices extends Component {
       },
       headerTintColor: '#fff'
     }),
-      // Dimensions.addEventListener("change", this._updateStyles);
+      Dimensions.addEventListener("change", this._updateStyles);
 
       lor(this);
-      console.log("this", this, "lor", lor)
   }
 
   _updateStyles = dims => {
     this.setState({
       viewMode: dims.window.height > dims.window.width ? "portrait" : "landscape"
     })
-    this.state.viewMode === "portrait" ? portraitWindowHeight = dims.window.height : portraitWindowHeight
-    this.state.viewMode === "portrait" ? portraitWindowWidth = dims.window.width : portraitWindowWidth
-    this.state.viewMode === "landscape" ? horizontalWindowWidth = dims.window.width : horizontalWindowWidth
-    this.state.viewMode === "landscape" ? horizontalWindowHeight = dims.window.height : horizontalWindowHeight
-
-    console.log("portraitWindowWidth:", portraitWindowWidth, "horizontalWIndowWidth:", horizontalWindowWidth)
   }
 
   componentWillUnmount() {
-    //Dimensions.removeEventListener("change", this._updateStyles);
+    Dimensions.removeEventListener("change", this._updateStyles);
     rol();
   }
 
@@ -119,10 +112,6 @@ class BluetoothDevices extends Component {
   render() {
 
     const styles = StyleSheet.create({
-      background: {
-        flex: 1,
-        color: "red"
-      },
       content: {
         alignContent: "center",
         justifyContent: "center",
@@ -131,6 +120,14 @@ class BluetoothDevices extends Component {
       sectionSizeOne: {
         height: hp('100%'),
         width: wp('100%')
+      },
+      twoDevicesHorDirection: {
+        flexDirection: "row"
+      },
+      twoDevicesPorDirection: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
       }
     })
 
@@ -145,28 +142,32 @@ class BluetoothDevices extends Component {
       // <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
       <View>
         {this.state.randomNumber <= 2 && (
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Timer', { number: 2 })}>
+          <TouchableOpacity
+            style={ styles.content }
+            onPress={() => this.props.navigation.navigate('Timer', { number: 2 })}>
             <Section style={styles.sectionSizeOne}>
+            <View style={ this.state.viewMode === "portrait" ? styles.twoDevicesPorDirection : styles.twoDevicesHorDirection }>
               <FontAwesome
                 name="dot-circle-o"
-                size={this.state.randomNumber <= 2 ? 100 : 35}
+                size={100}
                 color="#FF7400"
               />
               <FontAwesome
-                name="long-arrow-up"
-                size={this.state.randomNumber <= 2 ? 100 : 35}
+                name={this.state.viewMode === "portrait" ? "long-arrow-up" : "long-arrow-left"}
+                size={100}
                 color="#FF7400"
               />
               <FontAwesome
-                name="long-arrow-down"
-                size={this.state.randomNumber <= 2 ? 100 : 35}
+                name={this.state.viewMode === "portrait" ? "long-arrow-down" : "long-arrow-right"}
+                size={100}
                 color="#FF7400"
               />
               <FontAwesome
                 name="dot-circle-o"
-                size={this.state.randomNumber <= 2 ? 100 : 35}
+                size={100}
                 color="#FF7400"
               />
+              </View>
             </Section>
           </TouchableOpacity>
         )}
