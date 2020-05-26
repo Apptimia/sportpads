@@ -31,7 +31,7 @@ class BluetoothDevices extends Component {
 
   state = {
     // randomNumber: Math.floor(Math.random() * 4)
-    randomNumber: 2,
+    randomNumber: 3,
     device: "",
     viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape"
   }
@@ -61,7 +61,7 @@ class BluetoothDevices extends Component {
     }),
       Dimensions.addEventListener("change", this._updateStyles);
 
-      lor(this);
+    lor(this);
   }
 
   _updateStyles = dims => {
@@ -113,12 +113,14 @@ class BluetoothDevices extends Component {
 
     const styles = StyleSheet.create({
       content: {
-        alignContent: "center",
-        justifyContent: "center",
-        alignItems: "center"
+        flexDirection: "row"
       },
-      sectionSizeOne: {
+      sectionSizeTwoPortrait: {
         height: hp('100%'),
+        width: wp('100%')
+      },
+      sectionSizeTwoHorizontal: {
+        height: hp('81%'),
         width: wp('100%')
       },
       twoDevicesHorDirection: {
@@ -128,101 +130,100 @@ class BluetoothDevices extends Component {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center"
+      },
+      sectionSizeThreePortrait: {
+        height: hp('45%'),
+        width: wp('100%'),
+      },
+      sectionSizeThreeHorizontal: {
+        height: hp('100%'),
+        width: wp('50%')
       }
     })
 
     return (
-      // <View style={styles.background}>
-      // <View>
-      // <Fade style={{ justifyContent: 'center', alignItems: 'center' }}>
-      //   <View>
-      //     <Text style={{ fontSize: 20 }}>Test</Text>
-      //   </View>
-      // </Fade>
-      // <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
       <View>
         {this.state.randomNumber <= 2 && (
           <TouchableOpacity
-            style={ styles.content }
             onPress={() => this.props.navigation.navigate('Timer', { number: 2 })}>
-            <Section style={styles.sectionSizeOne}>
-            <View style={ this.state.viewMode === "portrait" ? styles.twoDevicesPorDirection : styles.twoDevicesHorDirection }>
-              <FontAwesome
-                name="dot-circle-o"
-                size={100}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name={this.state.viewMode === "portrait" ? "long-arrow-up" : "long-arrow-left"}
-                size={100}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name={this.state.viewMode === "portrait" ? "long-arrow-down" : "long-arrow-right"}
-                size={100}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={100}
-                color="#FF7400"
-              />
+            <Section style={this.state.viewMode === "portrait" ? styles.sectionSizeTwoPortrait : styles.sectionSizeTwoHorizontal}>
+              <View style={this.state.viewMode === "portrait" ? styles.twoDevicesPorDirection : styles.twoDevicesHorDirection}>
+                <FontAwesome
+                  name="dot-circle-o"
+                  size={100}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name={this.state.viewMode === "portrait" ? "long-arrow-up" : "long-arrow-left"}
+                  size={100}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name={this.state.viewMode === "portrait" ? "long-arrow-down" : "long-arrow-right"}
+                  size={100}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="dot-circle-o"
+                  size={100}
+                  color="#FF7400"
+                />
               </View>
             </Section>
           </TouchableOpacity>
         )}
         {this.state.randomNumber === 3 && (
-          <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
+          //<View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
+          <View style={styles.content}>
             <TouchableOpacity
-              style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
-              // onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
-              onPress={() => this._scanForDevices()}
+              // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
+              onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
+            // onPress={() => this._scanForDevices()}
             >
-              {/* <Section style={styles.sectionSizeTwo}> */}
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-up"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-down"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-up"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-down"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              {/* </Section> */}
+              <Section style={this.state.viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+                <FontAwesome
+                  name="dot-circle-o"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="long-arrow-up"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="long-arrow-down"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="dot-circle-o"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="long-arrow-up"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="long-arrow-down"
+                  size={30}
+                  color="#FF7400"
+                />
+                <FontAwesome
+                  name="dot-circle-o"
+                  size={30}
+                  color="#FF7400"
+                />
+              </Section>
             </TouchableOpacity>
             <TouchableOpacity
-              style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
+              // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 32 })}
             //onPress={() => this._connectToDevice()}
             >
-              {/* <Section style={styles.sectionSizeTwo}> */}
-              <View style={{ width: portraitWindowWidth / 2 }}>
+              <Section style={this.state.viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                   <FontAwesome
                     name="dot-circle-o"
@@ -276,8 +277,7 @@ class BluetoothDevices extends Component {
                   size={30}
                   color="#FF7400"
                 />
-              </View>
-              {/* </Section> */}
+              </Section>
             </TouchableOpacity>
           </View>
         )}
@@ -543,9 +543,6 @@ class BluetoothDevices extends Component {
           </View>
         )}
       </View>
-
-      //   </View>
-      // </View>
     )
   }
 }
