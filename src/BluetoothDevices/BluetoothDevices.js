@@ -31,7 +31,7 @@ class BluetoothDevices extends Component {
 
   state = {
     // randomNumber: Math.floor(Math.random() * 4)
-    randomNumber: 3,
+    randomNumber: 4,
     device: "",
     viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape"
   }
@@ -111,10 +111,9 @@ class BluetoothDevices extends Component {
 
   render() {
 
+    const { viewMode } = this.state
+
     const styles = StyleSheet.create({
-      content: {
-        flexDirection: "row"
-      },
       sectionSizeTwoPortrait: {
         height: hp('100%'),
         width: wp('100%')
@@ -138,6 +137,20 @@ class BluetoothDevices extends Component {
       sectionSizeThreeHorizontal: {
         height: hp('100%'),
         width: wp('50%')
+      },
+      columnDirection: {
+        flexDirection: "column"
+      },
+      rowDirection: {
+        flexDirection: "row"
+      },
+      sectionSizeFourPortrait: {
+        height: hp("30%"),
+        width: wp("100%")
+      },
+      sectionSizeFourHorizontal: {
+        height: hp("90%"),
+        width: wp("34%")
       }
     })
 
@@ -146,8 +159,8 @@ class BluetoothDevices extends Component {
         {this.state.randomNumber <= 2 && (
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Timer', { number: 2 })}>
-            <Section style={this.state.viewMode === "portrait" ? styles.sectionSizeTwoPortrait : styles.sectionSizeTwoHorizontal}>
-              <View style={this.state.viewMode === "portrait" ? styles.twoDevicesPorDirection : styles.twoDevicesHorDirection}>
+            <Section style={viewMode === "portrait" ? styles.sectionSizeTwoPortrait : styles.sectionSizeTwoHorizontal}>
+              <View style={viewMode === "portrait" ? styles.twoDevicesPorDirection : styles.twoDevicesHorDirection}>
                 <FontAwesome
                   name="dot-circle-o"
                   size={100}
@@ -173,14 +186,14 @@ class BluetoothDevices extends Component {
           </TouchableOpacity>
         )}
         {this.state.randomNumber === 3 && (
-          //<View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
-          <View style={styles.content}>
+          //<View style={this.state.viewMode === "portrait" ? styles.columnDirection : styles.rowDirection}>
+          <View style={styles.rowDirection}>
             <TouchableOpacity
               // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
             // onPress={() => this._scanForDevices()}
             >
-              <Section style={this.state.viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
                 <FontAwesome
                   name="dot-circle-o"
                   size={30}
@@ -223,7 +236,7 @@ class BluetoothDevices extends Component {
               onPress={() => this.props.navigation.navigate('Timer', { number: 32 })}
             //onPress={() => this._connectToDevice()}
             >
-              <Section style={this.state.viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                   <FontAwesome
                     name="dot-circle-o"
@@ -282,263 +295,210 @@ class BluetoothDevices extends Component {
           </View>
         )}
         {this.state.randomNumber === 4 && (
-          <View style={this.state.viewMode === "portrait" ? styles.portraitWrapper : styles.horizontalWrapper}>
+          <View style={viewMode === "portrait" ? styles.columnDirection : styles.rowDirection}>
             <TouchableOpacity
-              style={this.state.viewMode === "portrait" ? [styles.fourDevicesPortWrapper, { width: "33%", height: "100%" }] : [styles.fourDevicesHorWrapper, { width: horizontalWindowWidth / 3, height: horizontalWindowHeight * 0.81 }]}
               // onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
               onPress={() => this._scanForDevices()}
             >
-              {/* <Section style={styles.sectionSizeTwo}> */}
-              <View style={{ flexDirection: "row" }}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                  style={{ marginRight: 30 }}
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                  style={{ marginRight: 30 }}
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ transform: [{ rotate: '-35deg' }], marginRight: 15 }}>
+              <Section style={viewMode === "portrait" ? styles.sectionSizeFourPortrait : styles.sectionSizeFourHorizontal}>
+                <View style={{ flexDirection: "row" }}>
                   <FontAwesome
-                    name="long-arrow-up"
-                    size={33}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={33}
-                    color="#FF7400"
-                  />
-                </View>
-                <View>
-                  <FontAwesome
-                    name="long-arrow-up"
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
+                    style={{ marginRight: 30 }}
                   />
                   <FontAwesome
-                    name="long-arrow-down"
+                    name="dot-circle-o"
+                    size={30}
+                    color="#FF7400"
+                    style={{ marginRight: 30 }}
+                  />
+                  <FontAwesome
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
                   />
                 </View>
-                <View style={{ transform: [{ rotate: '35deg' }], marginLeft: 15 }}>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={33}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={33}
-                    color="#FF7400"
-                  />
-                </View>
-              </View>
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              {/* </Section> */}
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={this.state.viewMode === "portrait" ? [{ width: "33%", height: "100%" }, styles.fourDevicesPortWrapper] : [{ width: horizontalWindowWidth / 3, height: horizontalWindowHeight * 0.81 }, styles.fourDevicesHorWrapper]}
-              // onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
-              onPress={() => this._scanForDevices()}
-            >
-              <View style={{ flexDirection: "row" }}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-left"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-right"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              {/* <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <View style={{ flexDirection: "row" }}>
+                  <View style={{ transform: [{ rotate: '-35deg' }], marginRight: 15 }}>
+                    <FontAwesome
+                      name="long-arrow-up"
+                      size={33}
+                      color="#FF7400"
+                    />
+                    <FontAwesome
+                      name="long-arrow-down"
+                      size={33}
+                      color="#FF7400"
+                    />
+                  </View>
                   <View>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  </View> */}
-              {/* <View style={{ transform: [{ rotate: '50deg'}], marginLeft: windowWidth * 0.06 }}>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
+                    <FontAwesome
+                      name="long-arrow-up"
+                      size={30}
+                      color="#FF7400"
+                    />
+                    <FontAwesome
+                      name="long-arrow-down"
+                      size={30}
+                      color="#FF7400"
+                    />
                   </View>
-                  <View style={{ transform: [{ rotate: '-50deg'}], marginRight: windowWidth * 0.06 }}>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  </View> */}
-              {/* <View>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
+                  <View style={{ transform: [{ rotate: '35deg' }], marginLeft: 15 }}>
+                    <FontAwesome
+                      name="long-arrow-up"
+                      size={33}
+                      color="#FF7400"
+                    />
+                    <FontAwesome
+                      name="long-arrow-down"
+                      size={33}
+                      color="#FF7400"
+                    />
                   </View>
-                  </View> */}
-              <View>
-                <FontAwesome
-                  name="arrows-alt"
-                  size={40}
-                  color="#FF7400"
-                />
-              </View>
-              <View style={{ flexDirection: "row" }}>
+                </View>
                 <FontAwesome
                   name="dot-circle-o"
                   size={30}
                   color="#FF7400"
                 />
-                <FontAwesome
-                  name="long-arrow-left"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-right"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
+              </Section>
             </TouchableOpacity>
             <TouchableOpacity
-              style={this.state.viewMode === "portrait" ? [styles.fourDevicesPortWrapper, { width: "33%", height: "100%" }] : [styles.fourDevicesHorWrapper, { width: horizontalWindowWidth / 3, height: horizontalWindowHeight * 0.81 }]}
               // onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
               onPress={() => this._scanForDevices()}
             >
-              {/* <Section style={styles.sectionSizeTwo}> */}
-              {/* <View style={{ width: "40%", justifyContent: "center" }}> */}
-              <View style={{ flexDirection: "row" }}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-left"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-right"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <View style={{ marginRight: portraitWindowWidth * 0.1 }}>
+              <Section style={viewMode === "portrait" ? styles.sectionSizeFourPortrait : styles.sectionSizeFourHorizontal}>
+                <View style={{ flexDirection: "row" }}>
                   <FontAwesome
-                    name="long-arrow-up"
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
                   />
                   <FontAwesome
-                    name="long-arrow-down"
+                    name="long-arrow-left"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-right"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
                   />
                 </View>
                 <View>
                   <FontAwesome
-                    name="long-arrow-up"
+                    name="arrows-alt"
+                    size={40}
+                    color="#FF7400"
+                  />
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <FontAwesome
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
                   />
                   <FontAwesome
-                    name="long-arrow-down"
+                    name="long-arrow-left"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-right"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="dot-circle-o"
                     size={30}
                     color="#FF7400"
                   />
                 </View>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-left"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-right"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              {/* </View> */}
-              {/* </Section> */}
+              </Section>
+            </TouchableOpacity>
+            <TouchableOpacity
+              // onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
+              onPress={() => this._scanForDevices()}
+            >
+              <Section style={viewMode === "portrait" ? styles.sectionSizeFourPortrait : styles.sectionSizeFourHorizontal}>
+                <View style={{ flexDirection: "row" }}>
+                  <FontAwesome
+                    name="dot-circle-o"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-left"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-right"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="dot-circle-o"
+                    size={30}
+                    color="#FF7400"
+                  />
+                </View>
+                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                  <View style={{ marginRight: portraitWindowWidth * 0.1 }}>
+                    <FontAwesome
+                      name="long-arrow-up"
+                      size={30}
+                      color="#FF7400"
+                    />
+                    <FontAwesome
+                      name="long-arrow-down"
+                      size={30}
+                      color="#FF7400"
+                    />
+                  </View>
+                  <View>
+                    <FontAwesome
+                      name="long-arrow-up"
+                      size={30}
+                      color="#FF7400"
+                    />
+                    <FontAwesome
+                      name="long-arrow-down"
+                      size={30}
+                      color="#FF7400"
+                    />
+                  </View>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <FontAwesome
+                    name="dot-circle-o"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-left"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="long-arrow-right"
+                    size={30}
+                    color="#FF7400"
+                  />
+                  <FontAwesome
+                    name="dot-circle-o"
+                    size={30}
+                    color="#FF7400"
+                  />
+                </View>
+              </Section>
             </TouchableOpacity>
           </View>
         )}
@@ -546,69 +506,5 @@ class BluetoothDevices extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    color: "red"
-  },
-  content: {
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  sectionSizeOne: {
-    height: "100%",
-    width: "100%"
-  },
-  sectionSizeTwo: {
-    height: "50%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  sectionSizeThree: {
-    height: "33%",
-    width: "100%"
-  },
-  portraitWrapper: {
-    flexDirection: "column"
-  },
-  horizontalWrapper: {
-    flexDirection: "row"
-  },
-  threeDevicesPortWrapper: {
-    height: "50%",
-    borderColor: "#FF7400",
-    borderWidth: 3,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  threeDevicesHorWrapper: {
-    width: horizontalWindowWidth / 2,
-    height: horizontalWindowHeight * 0.81,
-    borderColor: "#FF7400",
-    borderWidth: 3,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  fourDevicesPortWrapper: {
-    // height: "33%",
-    // width: "100%",
-    borderColor: "#FF7400",
-    borderWidth: 3,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  fourDevicesHorWrapper: {
-    // width: horizontalWindowWidth / 3,
-    // height: horizontalWindowHeight * 0.81,
-    borderColor: "#FF7400",
-    borderWidth: 3,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-
-})
 
 export default BluetoothDevices
