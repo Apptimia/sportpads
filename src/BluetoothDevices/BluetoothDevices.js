@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Section from '../../components/section'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import Fontisto from 'react-native-vector-icons/Fontisto'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { requestLocationPermission } from '../util/permissions'
 import { BleManager } from 'react-native-ble-plx'
@@ -31,7 +31,7 @@ class BluetoothDevices extends Component {
 
   state = {
     // randomNumber: Math.floor(Math.random() * 4)
-    randomNumber: 4,
+    randomNumber: 3,
     device: "",
     viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape"
   }
@@ -135,7 +135,7 @@ class BluetoothDevices extends Component {
         width: wp('100%'),
       },
       sectionSizeThreeHorizontal: {
-        height: hp('100%'),
+        height: hp('90%'),
         width: wp('50%')
       },
       columnDirection: {
@@ -187,13 +187,13 @@ class BluetoothDevices extends Component {
         )}
         {this.state.randomNumber === 3 && (
           //<View style={this.state.viewMode === "portrait" ? styles.columnDirection : styles.rowDirection}>
-          <View style={styles.rowDirection}>
+          <View style={viewMode === "portrait" ? styles.columnDirection : styles.rowDirection}>
             <TouchableOpacity
               // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
             // onPress={() => this._scanForDevices()}
             >
-              <Section style={viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
                 <FontAwesome
                   name="dot-circle-o"
                   size={30}
@@ -236,7 +236,7 @@ class BluetoothDevices extends Component {
               onPress={() => this.props.navigation.navigate('Timer', { number: 32 })}
             //onPress={() => this._connectToDevice()}
             >
-              <Section style={viwMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                   <FontAwesome
                     name="dot-circle-o"
@@ -393,8 +393,8 @@ class BluetoothDevices extends Component {
                   />
                 </View>
                 <View>
-                  <FontAwesome
-                    name="arrows-alt"
+                  <Fontisto
+                    name="arrow-expand"
                     size={40}
                     color="#FF7400"
                   />
@@ -451,7 +451,7 @@ class BluetoothDevices extends Component {
                   />
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                  <View style={{ marginRight: portraitWindowWidth * 0.1 }}>
+                  <View style={{ marginRight: 75 }}>
                     <FontAwesome
                       name="long-arrow-up"
                       size={30}
