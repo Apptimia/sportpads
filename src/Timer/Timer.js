@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native'
-import { Stopwatch, Timer } from 'react-native-stopwatch-timer'
+import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
+import { Stopwatch } from 'react-native-stopwatch-timer'
 import Section from '../../components/section'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import {
   widthPercentageToDP as wp,
@@ -11,9 +10,7 @@ import {
   listenOrientationChange as lor,
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
-
-const windowHeight = Dimensions.get("window").height
-const windowWidth = Dimensions.get("window").width
+import { ThreeCircles } from '../../components/trainings'
 
 class TimerScreen extends Component {
 
@@ -28,12 +25,6 @@ class TimerScreen extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.route.params.number)
-    // Dimensions.addEventListener('change', () => {
-    //     this.setState({
-    //       orientation: isPortrait() ? 'portrait' : 'landscape'
-    //     });
-    //   });
     Dimensions.addEventListener("change", this._updateStyles);
   }
 
@@ -87,10 +78,10 @@ class TimerScreen extends Component {
     this.currentTime = time;
   };
 
-  horizontalView = () => {
+  horizontalView = (styles) => {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.rowDirection}>
           {this.props.route.params.number === 2 && (
             <Section>
               <TouchableOpacity>
@@ -121,48 +112,20 @@ class TimerScreen extends Component {
           )}
 
           {this.props.route.params.number === 31 && (
-            <Section style={{ width: "50%", height: windowHeight * 0.81, justifyContent: "center" }}>
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-up"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-down"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-up"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-down"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
+            <Section style={styles.horizontalContainer}>
+              <ThreeCircles
+                name1="dot-circle-o"
+                name2="long-arrow-up"
+                name3="long-arrow-down"
+                size={40}
                 color="#FF7400"
               />
             </Section>
           )}
 
           {this.props.route.params.number === 32 && (
-            <Section style={{ width: "50%", height: windowHeight * 0.81, justifyContent: "center" }}>
-              <View style={{ flexDirection: "row" }}>
+            <Section style={styles.horizontalContainer}>
+              <View style={styles.rowDirection}>
                 <FontAwesome
                   name="dot-circle-o"
                   size={30}
@@ -184,7 +147,7 @@ class TimerScreen extends Component {
                   color="#FF7400"
                 />
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View style={styles.rowDirection}>
                 <View style={{ transform: [{ rotate: '-30deg' }], marginRight: 15 }}>
                   <FontAwesome
                     name="long-arrow-up"
@@ -247,7 +210,7 @@ class TimerScreen extends Component {
     )
   }
 
-  portraitView = () => {
+  portraitView = (styles) => {
     return (
       <View style={{ flex: 1 }}>
         {this.props.route.params.number === 2 && (
@@ -280,47 +243,19 @@ class TimerScreen extends Component {
         )}
 
         {this.props.route.params.number === 31 && (
-          <Section style={{ height: "50%" }}>
-            <FontAwesome
-              name="dot-circle-o"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="long-arrow-up"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="long-arrow-down"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="dot-circle-o"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="long-arrow-up"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="long-arrow-down"
-              size={30}
-              color="#FF7400"
-            />
-            <FontAwesome
-              name="dot-circle-o"
-              size={30}
+          <Section style={styles.portraitContainer}>
+            <ThreeCircles
+              name1="dot-circle-o"
+              name2="long-arrow-up"
+              name3="long-arrow-down"
+              size={45}
               color="#FF7400"
             />
           </Section>
         )}
 
         {this.props.route.params.number === 32 && (
-          <Section style={{ height: "50%" }}>
+          <Section style={styles.portraitContainer}>
             <View style={{ flexDirection: "row" }}>
               <FontAwesome
                 name="dot-circle-o"
@@ -406,177 +341,25 @@ class TimerScreen extends Component {
   }
 
   render() {
+    const styles = StyleSheet.create({
+      portraitContainer: {
+        height: hp("50%")
+      },
+      horizontalContainer: {
+        width: wp("50%"),
+        height: hp("81%"),
+        justifyContent: "center",
+        alignItems: "center"
+      },
+      rowDirection: {
+        flexDirection: "row"
+      }
+    })
     return (
-      this.state.viewMode === "portrait" ? this.portraitView() : this.horizontalView()
+      this.state.viewMode === "portrait" ? this.portraitView(styles) : this.horizontalView(styles)
     )
   }
 }
-
-// const horizontalView = () => {
-//   return (
-//     <View>
-//       <Text>TEST</Text>
-//     </View>
-//   )
-// }
-
-// const portraitView = () => {
-//   return (
-//     <View style={{ flex: 1 }}>
-//             {this.props.route.params.number === 2 && (
-//             <Section>
-//             <TouchableOpacity onPress={() => console.log("test")}>
-//                 <FontAwesome
-//                   name="dot-circle-o"
-//                   size={this.state.randomNumber <= 2 ? 100 : 35}
-//                   color="#FF7400"
-//                 />
-//             </TouchableOpacity>
-//                 <FontAwesome
-//                   name="long-arrow-up"
-//                   size={this.state.randomNumber <= 2 ? 100 : 35}
-//                   color="#FF7400"
-//                 />
-//                 <FontAwesome
-//                   name="long-arrow-down"
-//                   size={this.state.randomNumber <= 2 ? 100 : 35}
-//                   color="#FF7400"
-//                 />
-//             <TouchableOpacity>
-//                 <FontAwesome
-//                   name="dot-circle-o"
-//                   size={this.state.randomNumber <= 2 ? 100 : 35}
-//                   color="#FF7400"
-//                 />
-//             </TouchableOpacity>
-//               </Section>
-//             )}
-
-//             {this.props.route.params.number === 31 && (
-//             <Section style={{height: "50%"}}>
-//             <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-up"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-down"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-up"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-down"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//               </Section>
-//             )}
-
-//             {this.props.route.params.number === 32 && (
-//             <Section>
-//             <View style={{ flexDirection: "row"}}>
-//                 <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-left"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-right"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   </View>
-//                   <View style={{ flexDirection: "row" }}>
-//                   <View style={{ transform: [{ rotate: '-30deg'}], marginRight: 15 }}>
-//                   <FontAwesome
-//                     name="long-arrow-up"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-down"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   </View>
-//                   <View style={{ transform: [{ rotate: '30deg'}], marginLeft: 15 }}>
-//                   <FontAwesome
-//                     name="long-arrow-up"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   <FontAwesome
-//                     name="long-arrow-down"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//                   </View>
-//                   </View>
-//                   <FontAwesome
-//                     name="dot-circle-o"
-//                     size={30}
-//                     color="#FF7400"
-//                   />
-//               </Section>
-//             )}
-
-//             <Stopwatch laps msecs start={this.state.stopwatchStart}
-//               reset={this.state.stopwatchReset}
-//               options={options}
-//               getTime={getFormattedTime} 
-//             />
-//             <View style={{ marginTop: 120}}>
-//             <View style={{ flexDirection: "row", justifyContent: "center" }}>
-//             <TouchableOpacity onPress={toggleStopwatch}>
-//               <Icon 
-//                     name={!this.state.stopwatchStart ? "play-circle" : "pause-circle"}
-//                     size={60}
-//                     color="#FF7400"
-//                     style={{marginRight: 20}}
-//                 />
-//             </TouchableOpacity>
-//             <TouchableOpacity onPress={resetStopwatch}>
-//                 <Icon 
-//                     name="stop-circle"
-//                     size={60}
-//                     color="#FF7400"
-//                 />
-//             </TouchableOpacity>
-//             </View>
-//             </View>
-//           </View>
-//   )
-// }
 
 const options = {
   container: {

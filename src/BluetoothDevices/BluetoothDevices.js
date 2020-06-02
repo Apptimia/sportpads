@@ -12,21 +12,6 @@ import {
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
 
-// function DevicesTitle() {
-//   const bluetoothArray = [1, 2, 3, 4]
-//   const randomNumber = Math.floor(Math.random() * (bluetoothArray.length+1))
-//   return (
-//     <View style={{ justifyContent: "center", alignContent: "center" }}>
-//       <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20, textAlign: "center" }}>Devices: {randomNumber}</Text>
-//     </View>
-//   )
-// }
-
-let horizontalWindowHeight = Dimensions.get("window").height
-let horizontalWindowWidth = Dimensions.get("window").width
-let portraitWindowWidth = Dimensions.get("window").width
-let portraitWindowHeight = Dimensions.get("window").height
-
 class BluetoothDevices extends Component {
 
   state = {
