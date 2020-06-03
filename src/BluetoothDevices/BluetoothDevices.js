@@ -11,6 +11,7 @@ import {
   listenOrientationChange as lor,
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
+import { ThreeCirclesTraining, TriangleTraining } from '../../components/trainings'
 
 class BluetoothDevices extends Component {
 
@@ -120,7 +121,7 @@ class BluetoothDevices extends Component {
         width: wp('100%'),
       },
       sectionSizeThreeHorizontal: {
-        height: hp('90%'),
+        height: hp('81%'),
         width: wp('50%')
       },
       columnDirection: {
@@ -176,42 +177,13 @@ class BluetoothDevices extends Component {
             <TouchableOpacity
               // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
-            // onPress={() => this._scanForDevices()}
             >
               <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-up"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-down"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-up"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-down"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
+                <ThreeCirclesTraining
+                  name1="dot-circle-o"
+                  name2="long-arrow-up"
+                  name3="long-arrow-down"
+                  size={viewMode === "portrait" ? 30 : 40}
                   color="#FF7400"
                 />
               </Section>
@@ -222,57 +194,13 @@ class BluetoothDevices extends Component {
             //onPress={() => this._connectToDevice()}
             >
               <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                  <FontAwesome
-                    name="dot-circle-o"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-left"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-right"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="dot-circle-o"
-                    size={30}
-                    color="#FF7400"
-                  />
-                </View>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={{ transform: [{ rotate: '-30deg' }], marginRight: 15 }}>
-                    <FontAwesome
-                      name="long-arrow-up"
-                      size={30}
-                      color="#FF7400"
-                    />
-                    <FontAwesome
-                      name="long-arrow-down"
-                      size={30}
-                      color="#FF7400"
-                    />
-                  </View>
-                  <View style={{ transform: [{ rotate: '30deg' }], marginLeft: 15 }}>
-                    <FontAwesome
-                      name="long-arrow-up"
-                      size={30}
-                      color="#FF7400"
-                    />
-                    <FontAwesome
-                      name="long-arrow-down"
-                      size={30}
-                      color="#FF7400"
-                    />
-                  </View>
-                </View>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
+                <TriangleTraining
+                  name1="dot-circle-o"
+                  name2="long-arrow-left"
+                  name3="long-arrow-right"
+                  name4="long-arrow-up"
+                  name5="long-arrow-down"
+                  size={viewMode === "portrait" ? 30 : 45}
                   color="#FF7400"
                 />
               </Section>

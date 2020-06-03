@@ -10,7 +10,7 @@ import {
   listenOrientationChange as lor,
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
-import { ThreeCircles } from '../../components/trainings'
+import { ThreeCirclesTraining, TriangleTraining } from '../../components/trainings'
 
 class TimerScreen extends Component {
 
@@ -113,7 +113,7 @@ class TimerScreen extends Component {
 
           {this.props.route.params.number === 31 && (
             <Section style={styles.horizontalContainer}>
-              <ThreeCircles
+              <ThreeCirclesTraining
                 name1="dot-circle-o"
                 name2="long-arrow-up"
                 name3="long-arrow-down"
@@ -125,57 +125,13 @@ class TimerScreen extends Component {
 
           {this.props.route.params.number === 32 && (
             <Section style={styles.horizontalContainer}>
-              <View style={styles.rowDirection}>
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-left"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-right"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="dot-circle-o"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              <View style={styles.rowDirection}>
-                <View style={{ transform: [{ rotate: '-30deg' }], marginRight: 15 }}>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
-                </View>
-                <View style={{ transform: [{ rotate: '30deg' }], marginLeft: 15 }}>
-                  <FontAwesome
-                    name="long-arrow-up"
-                    size={30}
-                    color="#FF7400"
-                  />
-                  <FontAwesome
-                    name="long-arrow-down"
-                    size={30}
-                    color="#FF7400"
-                  />
-                </View>
-              </View>
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
+              <TriangleTraining
+                name1="dot-circle-o"
+                name2="long-arrow-left"
+                name3="long-arrow-right"
+                name4="long-arrow-up"
+                name5="long-arrow-down"
+                size={45}
                 color="#FF7400"
               />
             </Section>
@@ -244,7 +200,7 @@ class TimerScreen extends Component {
 
         {this.props.route.params.number === 31 && (
           <Section style={styles.portraitContainer}>
-            <ThreeCircles
+            <ThreeCirclesTraining
               name1="dot-circle-o"
               name2="long-arrow-up"
               name3="long-arrow-down"
@@ -256,57 +212,13 @@ class TimerScreen extends Component {
 
         {this.props.route.params.number === 32 && (
           <Section style={styles.portraitContainer}>
-            <View style={{ flexDirection: "row" }}>
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-left"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="long-arrow-right"
-                size={30}
-                color="#FF7400"
-              />
-              <FontAwesome
-                name="dot-circle-o"
-                size={30}
-                color="#FF7400"
-              />
-            </View>
-            <View style={{ flexDirection: "row" }}>
-              <View style={{ transform: [{ rotate: '-30deg' }], marginRight: 15 }}>
-                <FontAwesome
-                  name="long-arrow-up"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-down"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-              <View style={{ transform: [{ rotate: '30deg' }], marginLeft: 15 }}>
-                <FontAwesome
-                  name="long-arrow-up"
-                  size={30}
-                  color="#FF7400"
-                />
-                <FontAwesome
-                  name="long-arrow-down"
-                  size={30}
-                  color="#FF7400"
-                />
-              </View>
-            </View>
-            <FontAwesome
-              name="dot-circle-o"
-              size={30}
+            <TriangleTraining
+              name1="dot-circle-o"
+              name2="long-arrow-left"
+              name3="long-arrow-right"
+              name4="long-arrow-up"
+              name5="long-arrow-down"
+              size={45}
               color="#FF7400"
             />
           </Section>
