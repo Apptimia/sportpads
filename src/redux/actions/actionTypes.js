@@ -1,0 +1,1 @@
+export const DARKMODE_TOGGLE = 'DARK_MODE_TOGGLE'

@@ -18,9 +18,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import BluetoothDevices from './src/BluetoothDevices/BluetoothDevices'
 import TimerScreen from './src/Timer/Timer'
 import WelcomeScreen from './src/WelcomeScreen/WelcomeScreen'
+import DrawerComponent from './components/DrawerComponent'
+import { Provider } from 'react-redux'
+import configureStore from './src/redux/configureStore'
 
+const store = configureStore()
 const Stack = createStackNavigator()
-
 const Drawer = createDrawerNavigator()
 
 function Root() {
@@ -56,12 +59,25 @@ function Root() {
   )
 }
 
-export default function App() {
+const MainStack = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: '#FF7400'
+        }}
+        drawerContent={(props) => <DrawerComponent {...props} />}
+      >
         <Drawer.Screen name="Root" component={Root} />
       </Drawer.Navigator>
     </NavigationContainer>
+  )
+}
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <MainStack />
+    </Provider>
   )
 }
