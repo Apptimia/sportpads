@@ -11,6 +11,7 @@ import {
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
 import { ThreeCirclesTraining, TriangleTraining } from '../../components/trainings'
+import { connect } from 'react-redux'
 
 class TimerScreen extends Component {
 
@@ -88,43 +89,43 @@ class TimerScreen extends Component {
                 <FontAwesome
                   name="dot-circle-o"
                   size={this.state.randomNumber <= 2 ? 100 : 35}
-                  color="#FF7400"
+                  color={orange}
                 />
               </TouchableOpacity>
               <FontAwesome
                 name="long-arrow-up"
                 size={this.state.randomNumber <= 2 ? 100 : 35}
-                color="#FF7400"
+                color={orange}
               />
               <FontAwesome
                 name="long-arrow-down"
                 size={this.state.randomNumber <= 2 ? 100 : 35}
-                color="#FF7400"
+                color={orange}
               />
               <TouchableOpacity>
                 <FontAwesome
                   name="dot-circle-o"
                   size={this.state.randomNumber <= 2 ? 100 : 35}
-                  color="#FF7400"
+                  color={orange}
                 />
               </TouchableOpacity>
             </Section>
           )}
 
           {this.props.route.params.number === 31 && (
-            <Section style={styles.horizontalContainer}>
+            <Section style={[styles.horizontalContainer, { backgroundColor: !this.props.darkMode? "#83807D" : "#eee" }]}>
               <ThreeCirclesTraining
                 name1="dot-circle-o"
                 name2="long-arrow-up"
                 name3="long-arrow-down"
                 size={40}
-                color="#FF7400"
+                color={orange}
               />
             </Section>
           )}
 
           {this.props.route.params.number === 32 && (
-            <Section style={styles.horizontalContainer}>
+            <Section style={[styles.horizontalContainer, { backgroundColor: !this.props.darkMode? "#83807D" : "#eee" }]}>
               <TriangleTraining
                 name1="dot-circle-o"
                 name2="long-arrow-left"
@@ -132,23 +133,29 @@ class TimerScreen extends Component {
                 name4="long-arrow-up"
                 name5="long-arrow-down"
                 size={45}
-                color="#FF7400"
+                color={orange}
               />
             </Section>
           )}
           <View style={{ flex: 1, flexDirection: "column", justifyContent: "space-around", alignItems: "center" }}>
-            <Stopwatch
-              laps msecs start={this.state.stopwatchStart}
-              reset={this.state.stopwatchReset}
-              options={options}
-              getTime={this.getFormattedTime}
-            />
+            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+              <FontAwesome
+                name="clock-o"
+                color={orange}
+                size={30}
+              />
+              <Stopwatch laps msecs start={this.state.stopwatchStart}
+                reset={this.state.stopwatchReset}
+                options={options}
+                getTime={this.getFormattedTime}
+              />
+            </View>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               <TouchableOpacity onPress={this.toggleStopwatch}>
                 <Icon
                   name={!this.state.stopwatchStart ? "play-circle" : "pause-circle"}
                   size={60}
-                  color="#FF7400"
+                  color={orange}
                   style={{ marginRight: 20 }}
                 />
               </TouchableOpacity>
@@ -156,7 +163,7 @@ class TimerScreen extends Component {
                 <Icon
                   name="stop-circle"
                   size={60}
-                  color="#FF7400"
+                  color={orange}
                 />
               </TouchableOpacity>
             </View>
@@ -168,50 +175,50 @@ class TimerScreen extends Component {
 
   portraitView = (styles) => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: "space-between" }}>
         {this.props.route.params.number === 2 && (
           <Section>
             <TouchableOpacity onPress={() => console.log("test")}>
               <FontAwesome
                 name="dot-circle-o"
                 size={this.state.randomNumber <= 2 ? 100 : 35}
-                color="#FF7400"
+                color={orange}
               />
             </TouchableOpacity>
             <FontAwesome
               name="long-arrow-up"
               size={this.state.randomNumber <= 2 ? 100 : 35}
-              color="#FF7400"
+              color={orange}
             />
             <FontAwesome
               name="long-arrow-down"
               size={this.state.randomNumber <= 2 ? 100 : 35}
-              color="#FF7400"
+              color={orange}
             />
             <TouchableOpacity>
               <FontAwesome
                 name="dot-circle-o"
                 size={this.state.randomNumber <= 2 ? 100 : 35}
-                color="#FF7400"
+                color={orange}
               />
             </TouchableOpacity>
           </Section>
         )}
 
         {this.props.route.params.number === 31 && (
-          <Section style={styles.portraitContainer}>
+          <Section style={[styles.portraitContainer, { backgroundColor: !this.props.darkMode? "#83807D" : "#eee" }]}>
             <ThreeCirclesTraining
               name1="dot-circle-o"
               name2="long-arrow-up"
               name3="long-arrow-down"
               size={45}
-              color="#FF7400"
+              color={orange}
             />
           </Section>
         )}
 
         {this.props.route.params.number === 32 && (
-          <Section style={styles.portraitContainer}>
+          <Section style={[styles.portraitContainer, { backgroundColor: !this.props.darkMode? "#83807D" : "#eee" }]}>
             <TriangleTraining
               name1="dot-circle-o"
               name2="long-arrow-left"
@@ -219,23 +226,30 @@ class TimerScreen extends Component {
               name4="long-arrow-up"
               name5="long-arrow-down"
               size={45}
-              color="#FF7400"
+              color={orange}
             />
           </Section>
         )}
 
-        <Stopwatch laps msecs start={this.state.stopwatchStart}
-          reset={this.state.stopwatchReset}
-          options={options}
-          getTime={this.getFormattedTime}
-        />
+        <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+          <FontAwesome
+            name="clock-o"
+            color={orange}
+            size={30}
+          />
+          <Stopwatch laps msecs start={this.state.stopwatchStart}
+            reset={this.state.stopwatchReset}
+            options={options}
+            getTime={this.getFormattedTime}
+          />
+        </View>
         <View style={{ marginTop: 30 }}>
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <TouchableOpacity onPress={this.toggleStopwatch}>
               <Icon
                 name={!this.state.stopwatchStart ? "play-circle" : "pause-circle"}
                 size={60}
-                color="#FF7400"
+                color={orange}
                 style={{ marginRight: 20 }}
               />
             </TouchableOpacity>
@@ -243,7 +257,7 @@ class TimerScreen extends Component {
               <Icon
                 name="stop-circle"
                 size={60}
-                color="#FF7400"
+                color={orange}
               />
             </TouchableOpacity>
           </View>
@@ -265,7 +279,7 @@ class TimerScreen extends Component {
       },
       rowDirection: {
         flexDirection: "row"
-      }
+      },
     })
     return (
       this.state.viewMode === "portrait" ? this.portraitView(styles) : this.horizontalView(styles)
@@ -275,7 +289,7 @@ class TimerScreen extends Component {
 
 const options = {
   container: {
-    backgroundColor: '#eee',
+    backgroundColor: 'transparent',
     borderRadius: 5,
     width: 200,
     alignSelf: "center"
@@ -284,7 +298,14 @@ const options = {
     fontSize: 30,
     color: 'black',
     marginLeft: 7,
-  }
-};
+  },
+  laps: true
+}
 
-export default TimerScreen
+const mapStateToProps = state => {
+  return {
+    darkMode: state.ui.darkMode
+  }
+}
+
+export default connect(mapStateToProps, null)(TimerScreen)

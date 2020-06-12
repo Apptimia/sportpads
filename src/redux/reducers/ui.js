@@ -1,4 +1,4 @@
-import { DARK_MODE_TOGGLE } from '../actions'
+import { DARK_MODE_TOGGLE } from '../actions/actionTypes'
 
 const initialState = {
   darkMode: false
@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
     case DARK_MODE_TOGGLE:
       return {
         ...state,
-        darkMode: !darkMode
+        darkMode: !state.darkMode
       }
     default:
       return state

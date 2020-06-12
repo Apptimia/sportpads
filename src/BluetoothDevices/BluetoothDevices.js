@@ -12,6 +12,8 @@ import {
   removeOrientationListener as rol
 } from 'react-native-responsive-screen'
 import { ThreeCirclesTraining, TriangleTraining } from '../../components/trainings'
+import { connect } from 'react-redux'
+import { orange, darkModeGrey } from '../util/constants'
 
 class BluetoothDevices extends Component {
 
@@ -41,7 +43,7 @@ class BluetoothDevices extends Component {
     this.props.navigation.setOptions({
       headerTitle: `Urządzenia: ${this.state.randomNumber}`,
       headerStyle: {
-        backgroundColor: "#FF7400"
+        backgroundColor: orange
       },
       headerTintColor: '#fff'
     }),
@@ -98,6 +100,7 @@ class BluetoothDevices extends Component {
   render() {
 
     const { viewMode } = this.state
+    const { darkMode } = this.props
 
     const styles = StyleSheet.create({
       sectionSizeTwoPortrait: {
@@ -150,22 +153,22 @@ class BluetoothDevices extends Component {
                 <FontAwesome
                   name="dot-circle-o"
                   size={100}
-                  color="#FF7400"
+                  color={orange}
                 />
                 <FontAwesome
                   name={this.state.viewMode === "portrait" ? "long-arrow-up" : "long-arrow-left"}
                   size={100}
-                  color="#FF7400"
+                  color={orange}
                 />
                 <FontAwesome
                   name={this.state.viewMode === "portrait" ? "long-arrow-down" : "long-arrow-right"}
                   size={100}
-                  color="#FF7400"
+                  color={orange}
                 />
                 <FontAwesome
                   name="dot-circle-o"
                   size={100}
-                  color="#FF7400"
+                  color={orange}
                 />
               </View>
             </Section>
@@ -178,13 +181,13 @@ class BluetoothDevices extends Component {
               // style={this.state.viewMode === "portrait" ? styles.threeDevicesPortWrapper : styles.threeDevicesHorWrapper}
               onPress={() => this.props.navigation.navigate('Timer', { number: 31 })}
             >
-              <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={[viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal, { backgroundColor: !darkMode? "#83807D" : "#eee" }]}>
                 <ThreeCirclesTraining
                   name1="dot-circle-o"
                   name2="long-arrow-up"
                   name3="long-arrow-down"
                   size={viewMode === "portrait" ? 30 : 40}
-                  color="#FF7400"
+                  color={orange}
                 />
               </Section>
             </TouchableOpacity>
@@ -193,7 +196,7 @@ class BluetoothDevices extends Component {
               onPress={() => this.props.navigation.navigate('Timer', { number: 32 })}
             //onPress={() => this._connectToDevice()}
             >
-              <Section style={viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal}>
+              <Section style={[viewMode === "portrait" ? styles.sectionSizeThreePortrait : styles.sectionSizeThreeHorizontal, {backgroundColor: !darkMode? "#83807D" : "#eee"}]}>
                 <TriangleTraining
                   name1="dot-circle-o"
                   name2="long-arrow-left"
@@ -201,7 +204,7 @@ class BluetoothDevices extends Component {
                   name4="long-arrow-up"
                   name5="long-arrow-down"
                   size={viewMode === "portrait" ? 30 : 45}
-                  color="#FF7400"
+                  color={orange}
                 />
               </Section>
             </TouchableOpacity>
@@ -218,19 +221,19 @@ class BluetoothDevices extends Component {
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                     style={{ marginRight: 30 }}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                     style={{ marginRight: 30 }}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -238,43 +241,43 @@ class BluetoothDevices extends Component {
                     <FontAwesome
                       name="long-arrow-up"
                       size={33}
-                      color="#FF7400"
+                      color={orange}
                     />
                     <FontAwesome
                       name="long-arrow-down"
                       size={33}
-                      color="#FF7400"
+                      color={orange}
                     />
                   </View>
                   <View>
                     <FontAwesome
                       name="long-arrow-up"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                     <FontAwesome
                       name="long-arrow-down"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                   </View>
                   <View style={{ transform: [{ rotate: '35deg' }], marginLeft: 15 }}>
                     <FontAwesome
                       name="long-arrow-up"
                       size={33}
-                      color="#FF7400"
+                      color={orange}
                     />
                     <FontAwesome
                       name="long-arrow-down"
                       size={33}
-                      color="#FF7400"
+                      color={orange}
                     />
                   </View>
                 </View>
                 <FontAwesome
                   name="dot-circle-o"
                   size={30}
-                  color="#FF7400"
+                  color={orange}
                 />
               </Section>
             </TouchableOpacity>
@@ -287,51 +290,51 @@ class BluetoothDevices extends Component {
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-left"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-right"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
                 <View>
                   <Fontisto
                     name="arrow-expand"
                     size={40}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
                 <View style={{ flexDirection: "row" }}>
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-left"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-right"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
               </Section>
@@ -345,22 +348,22 @@ class BluetoothDevices extends Component {
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-left"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-right"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -368,24 +371,24 @@ class BluetoothDevices extends Component {
                     <FontAwesome
                       name="long-arrow-up"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                     <FontAwesome
                       name="long-arrow-down"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                   </View>
                   <View>
                     <FontAwesome
                       name="long-arrow-up"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                     <FontAwesome
                       name="long-arrow-down"
                       size={30}
-                      color="#FF7400"
+                      color={orange}
                     />
                   </View>
                 </View>
@@ -393,22 +396,22 @@ class BluetoothDevices extends Component {
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-left"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="long-arrow-right"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                   <FontAwesome
                     name="dot-circle-o"
                     size={30}
-                    color="#FF7400"
+                    color={orange}
                   />
                 </View>
               </Section>
@@ -420,4 +423,10 @@ class BluetoothDevices extends Component {
   }
 }
 
-export default BluetoothDevices
+const mapStateToProps = state => {
+  return {
+    darkMode: state.ui.darkMode
+  }
+}
+
+export default connect(mapStateToProps, null)(BluetoothDevices)

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { View, Switch, StyleSheet } from "react-native";
+import { connect } from 'react-redux'
+import { darkModeToggle } from '../src/redux/actions'
 
-export default function DarkMode() {
+function DarkMode({darkModeToggle}) {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => 
-  setIsEnabled(previousState => !previousState)
-  darkMode = !darkMode
-  console.log(darkMode)
+  const toggleSwitch = () =>
+    setIsEnabled(previousState => !previousState)
+  darkModeToggle()
 
   return (
     <View style={styles.container}>
@@ -28,3 +29,12 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    darkModeToggle: () => dispatch(darkModeToggle())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DarkMode)
+
