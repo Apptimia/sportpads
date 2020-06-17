@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { TriangleTraining } from '../../components/trainings'
 import LinearGradient from "react-native-linear-gradient"
 import logo from "../assets/apptimialogo.png"
 
@@ -16,6 +17,15 @@ export default class WelcomeScreen extends Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Devices')}>
                 <Text style={{ fontSize: 40, color: "white", margin: 5 }}>Rozpocznij trening</Text>
             </TouchableOpacity>
+            <TriangleTraining
+                  name1="dot-circle-o"
+                  name2="long-arrow-left"
+                  name3="long-arrow-right"
+                  name4="long-arrow-up"
+                  name5="long-arrow-down"
+                  size={25}
+                  color="white"
+                />
           </View>
         </View>
       </LinearGradient>
@@ -30,53 +40,3 @@ const styles = StyleSheet.create({
     paddingRight: 15
   },
 })
-
-// import React, { useState, useRef } from 'react';
-// import { Text, View, StyleSheet, Button, StatusBar } from 'react-native';
-// import { Transitioning, Transition } from 'react-native-reanimated';
-
-// function Sequence() {
-//   const transition = (
-//     <Transition.Sequence>
-//       <Transition.Out type="scale" />
-//       <Transition.Change interpolation="easeInOut" />
-//       <Transition.In type="fade" />
-//     </Transition.Sequence>
-//   );
-
-//   let [showText, setShowText] = useState(true);
-//   const ref = useRef();
-
-//   return (
-//     <Transitioning.View
-//       ref={ref}
-//       transition={transition}
-//       style={styles.centerAll}>
-//       <Button
-//         title="show or hide"
-//         color="#FF5252"
-//         onPress={() => {
-//           ref.current.animateNextTransition();
-//           setShowText(!showText);
-//         }}
-//       />
-//       {showText && (
-//         <Text style={styles.text}>Tap the above button to hide me</Text>
-//       )}
-//     </Transitioning.View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   centerAll: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   text: {
-//     fontSize: 16,
-//     margin: 10,
-//   },
-// });
-
-// export default Sequence;
