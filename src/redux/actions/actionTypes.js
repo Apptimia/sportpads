@@ -1,1 +1,2 @@
 export const DARK_MODE_TOGGLE = 'DARK_MODE_TOGGLE'
+export const ADD_TRAINING = 'ADD_TRAINING'

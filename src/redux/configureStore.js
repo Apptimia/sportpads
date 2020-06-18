@@ -1,8 +1,10 @@
 import { createStore, combineReducers, compose } from 'redux'
 import uiReducer from './reducers/ui'
+import trainingsReducer from './reducers/trainings'
 
 const rootReducer = combineReducers({
-    ui: uiReducer
+    ui: uiReducer,
+    trainings: trainingsReducer
 })
 
 let composeEnhancers = compose;
