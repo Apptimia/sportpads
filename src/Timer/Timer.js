@@ -12,6 +12,9 @@ import {
 } from 'react-native-responsive-screen'
 import { ThreeCirclesTraining, TriangleTraining } from '../../components/trainings'
 import { connect } from 'react-redux'
+import { orange } from '../util/constants'
+import { addTraining } from '../redux/actions'
+import moment from 'moment'
 
 class TimerScreen extends Component {
 
@@ -22,7 +25,8 @@ class TimerScreen extends Component {
     totalDuration: 90000,
     timerReset: false,
     stopwatchReset: false,
-    viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape"
+    viewMode: Dimensions.get("window").height > Dimensions.get("window").width ? "portrait" : "landscape",
+    currentDate: moment().format()
   }
 
   componentDidMount() {
@@ -72,7 +76,9 @@ class TimerScreen extends Component {
   }
 
   resetStopwatch = () => {
+    const trainingWithDate = `${moment().format('L')} ${this.currentTime}`
     this.setState({ stopwatchStart: false, stopwatchReset: true });
+    this.props.addTraining(trainingWithDate)
   }
 
   getFormattedTime = (time) => {
@@ -308,4 +314,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(TimerScreen)
+export default connect(mapStateToProps, { addTraining })(TimerScreen)

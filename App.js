@@ -19,6 +19,7 @@ import BluetoothDevices from './src/BluetoothDevices/BluetoothDevices'
 import TimerScreen from './src/Timer/Timer'
 import WelcomeScreen from './src/WelcomeScreen/WelcomeScreen'
 import DrawerComponent from './components/DrawerComponent'
+import TrainingsHistory from './src/TrainingsHistory/TrainingsHistory'
 import { Provider } from 'react-redux'
 import configureStore from './src/redux/configureStore'
 
@@ -37,6 +38,9 @@ function Root() {
           headerStyle: {
             backgroundColor: "#FF7400"
           },
+          headerTitleStyle: {
+            alignSelf: "center"
+          },
           headerTintColor: '#fff'
         }}
       />
@@ -54,6 +58,10 @@ function Root() {
           },
           headerTintColor: '#fff'
         }}
+      />
+      <Stack.Screen
+        name="Trainings"
+        component={TrainingsHistory}
       />
     </Stack.Navigator>
   )
